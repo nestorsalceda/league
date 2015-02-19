@@ -8,17 +8,17 @@ module LigaFutbolin
     end
 
     def classification
-      results = @teams.map do |team|
-        points = 0
-        team.results.each do |result|
-          if result.result_local > result.result_visitor
-            points += POINTS_PER_VICTORY
-          end
-        end
-        ClassificationEntry.new(team, points)
-      end
-
+      results = @teams.map{ |team| ClassificationEntry.new(team, points_for(team)) }
       results.sort_by{ |team| team.points }.reverse!
+    end
+
+    private
+
+    def points_for(team)
+      points = 0
+      team.results.each do |result|
+        points += POINTS_PER_VICTORY if result.local_won?
+      end
     end
   end
 end

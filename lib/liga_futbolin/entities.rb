@@ -1,6 +1,10 @@
 module LigaFutbolin
 
-  Result = Struct.new('Result', :opponent, :result_local, :result_visitor)
+  Result = Struct.new(:opponent, :result_local, :result_visitor) do
+    def local_won?
+      result_local > result_visitor
+    end
+  end
 
   class Team
     attr_reader :name, :results
