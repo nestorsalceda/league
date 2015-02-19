@@ -8,3 +8,4 @@ group :development do
   gem "rerun"
 end
 
+ruby "2.2.0"
