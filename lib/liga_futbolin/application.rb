@@ -6,12 +6,16 @@ module LigaFutbolin
     def initialize(app=nil)
       super(app)
 
+      @match_repository = MatchRepository.new
+      @classification_service = ClassificationService.new(@match_repository)
+      seed_data
+    end
+
+    def seed_data
       trilogy_a = Team.new('Trilogy A')
       trilogy_b = Team.new('Trilogy B')
       trilogy_c = Team.new('Trilogy C')
       tonel = Team.new('Tonel')
-
-      @match_repository = MatchRepository.new
 
       @match_repository.put(Match.new(trilogy_a, trilogy_b, 7, 13))
       @match_repository.put(Match.new(trilogy_c, tonel, 13, 7))
@@ -21,11 +25,7 @@ module LigaFutbolin
 
       @match_repository.put(Match.new(trilogy_a, tonel, 7, 13))
       @match_repository.put(Match.new(trilogy_b, trilogy_c, 13, 7))
-
-
-
-      @classification_service = ClassificationService.new(@match_repository)
-    end
+  end
 
     get '/' do
       classification = @classification_service.classification

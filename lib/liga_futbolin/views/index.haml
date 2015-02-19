@@ -1,20 +1,22 @@
-%h1
-  Clasificación de Equipos
+.container
+  .page-header
+    %h1
+      Clasificación
 
-%table
-  %thead
-    %tr
-      %th/
-      %th
-        Equipo
-      %th
-        Puntos
-  %tbody
-    - classification.each_with_index do |entry, index|
+  %table.table
+    %thead
       %tr
+        %th/
         %th
-          = index + 1
-        %td
-          = entry.team.name
-        %td
-          = entry.points
+          Equipo
+        %th
+          Puntos
+    %tbody
+      - classification.each_with_index do |entry, index|
+        %tr
+          %th
+            = index + 1
+          %td
+            = entry.team.name
+          %td
+            = entry.points
