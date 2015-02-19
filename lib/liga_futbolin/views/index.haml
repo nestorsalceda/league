@@ -1,0 +1,20 @@
+%h1
+  Clasificación de Equipos
+
+%table
+  %thead
+    %tr
+      %th/
+      %th
+        Equipo
+      %th
+        Puntos
+  %tbody
+    - classification.each_with_index do |entry, index|
+      %tr
+        %th
+          = index + 1
+        %td
+          = entry.team.name
+        %td
+          = entry.points
