@@ -19,6 +19,7 @@ module LigaFutbolin
       team.results.each do |result|
         points += POINTS_PER_VICTORY if result.local_won?
       end
+      points
     end
   end
 end
