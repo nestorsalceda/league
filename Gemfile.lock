@@ -1,54 +1,54 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    celluloid (0.16.0)
-      timers (~> 4.0.0)
+    backports (3.6.4)
     diff-lcs (1.2.5)
-    ffi (1.9.6)
-    haml (4.0.6)
-      tilt
-    hitimes (1.2.2)
-    listen (2.8.5)
-      celluloid (>= 0.15.2)
-      rb-fsevent (>= 0.9.3)
-      rb-inotify (>= 0.9)
-    puma (2.11.1)
+    multi_json (1.11.0)
+    puma (2.11.2)
       rack (>= 1.1, < 2.0)
     rack (1.6.0)
     rack-protection (1.5.3)
       rack
-    rb-fsevent (0.9.4)
-    rb-inotify (0.9.5)
-      ffi (>= 0.5.0)
-    rerun (0.10.0)
-      listen (~> 2.7, >= 2.7.3)
+    rack-test (0.6.3)
+      rack (>= 1.0)
     rspec (3.2.0)
       rspec-core (~> 3.2.0)
       rspec-expectations (~> 3.2.0)
       rspec-mocks (~> 3.2.0)
-    rspec-core (3.2.0)
+    rspec-core (3.2.3)
       rspec-support (~> 3.2.0)
-    rspec-expectations (3.2.0)
+    rspec-expectations (3.2.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.2.0)
-    rspec-mocks (3.2.0)
+    rspec-mocks (3.2.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.2.0)
-    rspec-support (3.2.1)
-    sinatra (1.4.5)
+    rspec-support (3.2.2)
+    sinatra (1.4.6)
       rack (~> 1.4)
       rack-protection (~> 1.4)
-      tilt (~> 1.3, >= 1.3.4)
+      tilt (>= 1.3, < 3)
+    sinatra-contrib (1.4.2)
+      backports (>= 2.0)
+      multi_json
+      rack-protection
+      rack-test
+      sinatra (~> 1.4.0)
+      tilt (~> 1.3)
+    sinatra-reloader (1.0)
+      sinatra-contrib
+    slim (3.0.3)
+      temple (~> 0.7.3)
+      tilt (>= 1.3.3, < 2.1)
+    temple (0.7.5)
     tilt (1.4.1)
-    timers (4.0.1)
-      hitimes
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  haml (~> 4.0.6)
   puma
-  rerun
   rspec (~> 3.2.0)
   sinatra (~> 1.4.5)
+  sinatra-reloader
+  slim (~> 3.0.3)

@@ -1,8 +1,15 @@
 require 'sinatra/base'
-require 'haml'
+require 'slim'
 
 module LigaFutbolin
   class Application < Sinatra::Base
+    configure :development do
+      require 'sinatra/reloader'
+
+      register Sinatra::Reloader
+      also_reload File.join(__dir__, '*.rb')
+    end
+
     def initialize(app=nil)
       super(app)
 
@@ -10,6 +17,7 @@ module LigaFutbolin
       @classification_service = ClassificationService.new(@match_repository)
       seed_data
     end
+
 
     def seed_data
       trilogy_a = Team.new('Trilogy A')
@@ -23,14 +31,14 @@ module LigaFutbolin
       @match_repository.put(Match.new(trilogy_a, trilogy_c, 13, 4))
       @match_repository.put(Match.new(trilogy_b, tonel, 13, 4))
 
-      @match_repository.put(Match.new(trilogy_a, tonel, 7, 13))
+      @match_repository.put(Match.new(trilogy_a, tonel, 13, 4))
       @match_repository.put(Match.new(trilogy_b, trilogy_c, 13, 7))
-  end
+    end
 
     get '/' do
       classification = @classification_service.classification
 
-      haml :index, layout: :layout, locals: {
+      slim :index, layout: :layout, locals: {
         :classification => classification
       }
     end
