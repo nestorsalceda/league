@@ -1,3 +1,3 @@
-require_relative 'lib/liga_futbolin'
+require_relative 'webapp/application'
 
-run LigaFutbolin::Application
+run LigaFutbolin::Webapp::Application

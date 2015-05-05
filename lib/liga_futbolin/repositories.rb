@@ -1,13 +1,15 @@
-class MatchRepository
-  def initialize
-    @matches = []
-  end
+module LigaFutbolin
+  class MatchRepository
+    def initialize
+      @matches = []
+    end
 
-  def put(match)
-    @matches << match
-  end
+    def put(match)
+      @matches << match
+    end
 
-  def all
-    @matches
+    def all
+      @matches
+    end
   end
 end
