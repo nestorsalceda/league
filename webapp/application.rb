@@ -1,7 +1,7 @@
 require 'sinatra/base'
 require 'slim'
 
-require_relative "../lib/liga_futbolin"
+require_relative "../lib/league"
 
 module League::Webapp
   class Application < Sinatra::Base
