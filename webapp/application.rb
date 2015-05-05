@@ -3,7 +3,7 @@ require 'slim'
 
 require_relative "../lib/liga_futbolin"
 
-module LigaFutbolin::Webapp
+module League::Webapp
   class Application < Sinatra::Base
     configure :development do
       require 'sinatra/reloader'
@@ -16,26 +16,26 @@ module LigaFutbolin::Webapp
     def initialize(app=nil)
       super(app)
 
-      @match_repository = LigaFutbolin::MatchRepository.new
-      @classification_service = LigaFutbolin::ClassificationService.new(@match_repository)
+      @match_repository = League::MatchRepository.new
+      @classification_service = League::ClassificationService.new(@match_repository)
       seed_data
     end
 
 
     def seed_data
-      trilogy_a = LigaFutbolin::Team.new('Trilogy A')
-      trilogy_b = LigaFutbolin::Team.new('Trilogy B')
-      trilogy_c = LigaFutbolin::Team.new('Trilogy C')
-      tonel = LigaFutbolin::Team.new('Tonel')
+      trilogy_a = League::Team.new('Trilogy A')
+      trilogy_b = League::Team.new('Trilogy B')
+      trilogy_c = League::Team.new('Trilogy C')
+      tonel = League::Team.new('Tonel')
 
-      @match_repository.put(LigaFutbolin::Match.new(trilogy_a, trilogy_b, 7, 13))
-      @match_repository.put(LigaFutbolin::Match.new(trilogy_c, tonel, 13, 7))
+      @match_repository.put(League::Match.new(trilogy_a, trilogy_b, 7, 13))
+      @match_repository.put(League::Match.new(trilogy_c, tonel, 13, 7))
 
-      @match_repository.put(LigaFutbolin::Match.new(trilogy_a, trilogy_c, 13, 4))
-      @match_repository.put(LigaFutbolin::Match.new(trilogy_b, tonel, 13, 4))
+      @match_repository.put(League::Match.new(trilogy_a, trilogy_c, 13, 4))
+      @match_repository.put(League::Match.new(trilogy_b, tonel, 13, 4))
 
-      @match_repository.put(LigaFutbolin::Match.new(trilogy_a, tonel, 13, 4))
-      @match_repository.put(LigaFutbolin::Match.new(trilogy_b, trilogy_c, 13, 7))
+      @match_repository.put(League::Match.new(trilogy_a, tonel, 13, 4))
+      @match_repository.put(League::Match.new(trilogy_b, trilogy_c, 13, 7))
     end
 
     get '/' do

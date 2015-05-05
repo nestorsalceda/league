@@ -1,6 +1,4 @@
-require_relative '../lib/liga_futbolin'
-
-module LigaFutbolin
+module League
   describe "ClassificationService" do
     context "when checking the leader" do
       before(:each) do

@@ -1,4 +1,4 @@
-module LigaFutbolin
+module League
 
   Match = Struct.new(:local, :visitor, :result_local, :result_visitor) do
     def winner

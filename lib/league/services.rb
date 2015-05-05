@@ -1,4 +1,4 @@
-module LigaFutbolin
+module League
   POINTS_PER_VICTORY = 3
   ClassificationEntry = Struct.new('ClassificationEntry', :team, :points)
 

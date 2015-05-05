@@ -1,4 +1,4 @@
-module LigaFutbolin
+module League
   class MatchRepository
     def initialize
       @matches = []
