@@ -1,4 +1,4 @@
-require_relative '../lib/league'
+require 'league'
 
 RSpec.configure do |config|
 
