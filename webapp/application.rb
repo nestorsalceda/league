@@ -1,7 +1,7 @@
 require 'sinatra/base'
 require 'slim'
 
-require_relative "../lib/league"
+require "league"
 
 module League::Webapp
   class Application < Sinatra::Base
@@ -9,8 +9,8 @@ module League::Webapp
       require 'sinatra/reloader'
 
       register Sinatra::Reloader
-      also_reload File.join(__dir__, '*.rb')
-      also_reload File.join(__dir__, '../lib/**/*.rb')
+      also_reload File.join(__dir__, '**/*.rb')
+      also_reload File.join(__dir__, '../league/**/*.rb')
     end
 
     def initialize(app=nil)
