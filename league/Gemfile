@@ -1,10 +1,4 @@
-source "http://rubygems.org"
+source 'https://rubygems.org'
 
-gem "sinatra", "~> 1.4.5"
-gem "slim", "~> 3.0.3"
-gem "puma"
-
-group :development do
-  gem "rspec", "~> 3.2.0"
-  gem "sinatra-reloader"
-end
+# Specify your gem's dependencies in league.gemspec
+gemspec
