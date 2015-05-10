@@ -11,8 +11,37 @@ html.no-js lang="es"
     meta name="viewport" content="width=device-width, initial-scale=1"
 
     link rel='stylesheet' type='text/css' href='http://bootswatch.com/sandstone/bootstrap.min.css'
+    css:
+      html {
+        position: relative;
+        min-height: 100%;
+      }
+      body {
+        /* Margin bottom by footer height */
+        margin-bottom: 60px;
+      }
+      footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        /* Set the fixed height of the footer here */
+        height: 60px;
+        background-color: #f5f5f5;
+      }
+      footer .text-muted {
+        margin: 20px 0;
+      }
+
+
   body
     == yield
+
+    footer
+      .container
+        p.text-muted.text-center
+          ' Crafted with love by
+          a href="http://nestorsalceda.com" Néstor Salceda
+
 
     script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js'
     script src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'
