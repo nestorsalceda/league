@@ -18,7 +18,7 @@ module League
   end
 
   class Group
-    attr_reader :name
+    attr_reader :name, :teams
 
     def initialize(name)
       @name = name
@@ -27,6 +27,10 @@ module League
 
     def add_team(team)
       @teams << team
+    end
+
+    def include?(team)
+      @teams.include?(team)
     end
   end
 
@@ -44,11 +48,24 @@ module League
   end
 
   class Match
-    attr_reader :local, :visitor
+    attr_reader :local, :visitor, :local_result, :visitor_result
 
     def initialize(local, visitor)
       @local = local
       @visitor = visitor
+      @result_local = 0
+      @result_visitor = 0
+    end
+
+    def result(local, visitor)
+      @local_result = local
+      @visitor_result = visitor
+    end
+
+    def winner
+      return nil if local_result == visitor_result
+      return local if local_result > visitor_result
+      return visitor
     end
   end
 end

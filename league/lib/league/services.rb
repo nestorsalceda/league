@@ -3,38 +3,26 @@ module League
   ClassificationEntry = Struct.new('ClassificationEntry', :team, :points)
 
   class ClassificationService
-    def classification
-      results = []
-      matches_per_team.each do |team, matches|
-        results << ClassificationEntry.new(team, points_for(team, matches))
-      end
-      results.sort_by{ |team| team.points }.reverse!
-    end
-
-    private
-
-    def matches_per_team
-      matches = {}
-
-      @match_repository.all.each do |match|
-        matches[match.local] = []
-        matches[match.visitor] = []
+    def classification_for(group, competition)
+      classification = {}
+      group.teams.each do |team|
+        classification[team] = ClassificationEntry.new(team, 0)
       end
 
-      @match_repository.all.each do |match|
-        matches[match.local] << match
-        matches[match.visitor] << match
+      competition.journeys.each do |journey|
+        journey.matches.each do |match|
+          if group.include? match.local
+            if match.winner == match.local
+              classification[match.local].points += POINTS_PER_VICTORY
+            end
+            if match.winner == match.visitor
+              classification[match.visitor].points += POINTS_PER_VICTORY
+            end
+          end
+        end
       end
 
-      matches
-    end
-
-    def points_for(team, matches)
-      points = 0
-      matches.each do |match|
-        points += POINTS_PER_VICTORY if match.winner == team
-      end
-      points
+      classification.values.sort_by{ |team| team.points }.reverse!
     end
   end
 end

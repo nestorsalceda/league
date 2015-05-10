@@ -37,6 +37,10 @@ module League
     def match(local, visitor, &block)
       match = Match.new(local, visitor)
       @journey.add_match(match)
+
+      if block_given?
+        match.instance_eval(&block)
+      end
     end
   end
 end
