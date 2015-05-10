@@ -25,11 +25,16 @@ module League::Webapp
 
     get '/:competition' do
       competition = Object.new.instance_eval(File.read("./competitions/#{params['competition']}.rb"))
-      #classification = @classification_service.classification(competition)
+
+      classifications = {}
+      competition.groups.each do |group|
+        classifications[group] = @classification_service.classification_for(group, competition)
+      end
 
       slim :index, :locals => {
         :title => competition.name,
-        :competition => competition
+        :competition => competition,
+        :classifications => classifications
       }
     end
   end
