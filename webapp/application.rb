@@ -24,7 +24,7 @@ module League::Webapp
     end
 
     get '/:competition' do
-      competition = Object.new.instance_eval(File.read("./competitions/#{params['competition']}.rb"))
+      competition = Object.new.instance_eval(File.read(File.join(__dir__, "competitions", "#{params['competition']}.rb")))
 
       classifications = {}
       competition.groups.each do |group|
