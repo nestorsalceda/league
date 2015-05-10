@@ -1,73 +1,42 @@
 module League
-  class Competition
-    attr_reader :name, :journeys
+  class CompetitionBuilder
+    attr_reader :competition
 
-    def initialize(name, &block)
-      @name = name
-      @teams = {}
-      @journeys = []
-      instance_eval &block
+    def initialize(competition)
+      @competition = competition
     end
 
-    def teams
-      if block_given?
-        teams = yield
-        teams.each do |team|
-          name = team.gsub(' ', '_').downcase
-          @teams[name] = team
-          define_singleton_method(name.to_sym) do
-            team
-          end
-        end
-      else
-        @teams.values
-      end
+    def self.build(name, &block)
+      builder = CompetitionBuilder.new(Competition.new(name))
+      builder.instance_eval &block
+      builder.competition
     end
 
-    def journey(date, &block)
-      j = Journey.new(date)
-      @teams.each do |name, team|
-        j.define_singleton_method(name.to_sym) do
+    def group(name, &block)
+      group = Group.new(name)
+      teams = yield
+
+      teams.each do |team|
+        group.add_team(team)
+        name = team.gsub(' ', '_').downcase
+        define_singleton_method(name.to_sym) do
           team
         end
       end
-      j.instance_eval(&block)
-      @journeys << j
+
+      @competition.add_group(group)
     end
 
-  end
+    def journey(date, &block)
+      @journey = Journey.new(date)
+      @competition.add_journey(@journey)
 
-  class Journey
-    attr_reader :date, :matches
-
-    def initialize(date)
-      @date = date
-      @matches = []
+      instance_eval &block
     end
 
     def match(local, visitor, &block)
-      m = Match.new(local, visitor)
-      if block_given?
-        m.instance_eval(&block)
-      end
-      @matches << m
-    end
-  end
-
-  class Match
-    attr_reader :local_team, :visitor_team
-    attr_accessor :local_result, :visitor_result
-
-    def initialize(local_team, visitor_team)
-      @local_team = local_team
-      @visitor_team = visitor_team
-      @local_result = nil
-      @visitor_result = nil
-    end
-
-    def result(local, visitor)
-      @local_result = local
-      @visitor_result = visitor
+      match = Match.new(local, visitor)
+      @journey.add_match(match)
     end
   end
 end

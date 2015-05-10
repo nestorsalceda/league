@@ -1,4 +1,4 @@
 require 'league/services'
-require 'league/entities'
-require 'league/repositories'
+require 'league/aggregates'
+require 'league/dsl'
 require 'league/version'
