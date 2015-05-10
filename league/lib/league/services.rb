@@ -3,10 +3,6 @@ module League
   ClassificationEntry = Struct.new('ClassificationEntry', :team, :points)
 
   class ClassificationService
-    def initialize(match_repository)
-       @match_repository = match_repository
-    end
-
     def classification
       results = []
       matches_per_team.each do |team, matches|

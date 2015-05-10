@@ -1,12 +1,10 @@
-League::Competition.new('Copa LAF 2015') do
-  teams do
-    group "A" do
-      ["Topos B", "Tonel" , "Trilogy A"]
-    end
+League::CompetitionBuilder.build('Copa LAF 2015') do
+  group "A" do
+    ["Topos B", "Tonel" , "Trilogy A"]
+  end
 
-    group "B" do
-      ["Migas", "Topos A" , "Trilogy B"]
-    end
+  group "B" do
+    ["Migas", "Topos A" , "Trilogy B"]
   end
 
   journey "9/5/2015" do
@@ -25,10 +23,10 @@ League::Competition.new('Copa LAF 2015') do
   end
 
   journey "29/5/2015" do
-    title "Semifinales"
+#    title "Semifinales"
   end
 
   journey "5/6/2015" do
-    title "Comida de amistad + final"
+#    title "Comida de amistad + final"
   end
 end
