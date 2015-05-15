@@ -1,47 +1,60 @@
 module League
   describe "ClassificationService" do
-    context "when checking the leader" do
-      before(:each) do
-        @leader = Team.new('Trilogy B')
-        @last = Team.new('Tonel')
+    let(:a_team) { 'Irrelevant Team' }
+    let(:other_team) { 'Other Team' }
+    let(:teams) { [a_team, other_team] }
 
-        @match_repository = MatchRepository.new
-        @match_repository.put(Match.new(@leader, @last, 13, 1))
+    before(:each) do
+        @service = ClassificationService.new
+    end
 
-        @service = ClassificationService.new(@match_repository)
+    it "has same length that teams playing" do
+        classification = @service.calculate_classification(teams, [])
+
+        expect(classification.length).to eq(teams.length)
+    end
+
+    context "when counting points" do
+      it "adds 3 points for victory" do
+        matches = [Match.new(a_team, other_team, 13, 1)]
+
+        classification = @service.calculate_classification(teams, matches)
+
+        expect(classification[0].team).to eq(a_team)
+        expect(classification[0].points).to eq(3)
       end
 
-      it "add 3 points per victory" do
-        results = @service.classification
+      context "when visitor wins" do
+        it "adds 3 points for victory" do
+          matches = [Match.new(other_team, a_team, 1, 13)]
 
-        expect(results[0].points).to eq(3)
-      end
+          classification = @service.calculate_classification(teams, matches)
 
-      it "puts leader the team with more points" do
-        results = @service.classification
-
-        expect(results[0].team).to eq(@leader)
-        expect(results[1].team).to eq(@last)
-      end
-
-      context "when visitor team wins games" do
-        before(:each) do
-          @match_repository.put(Match.new(@leader, @last, 1, 13))
-          @match_repository.put(Match.new(@leader, @last, 1, 13))
+          expect(classification[0].team).to eq(a_team)
+          expect(classification[0].points).to eq(3)
         end
+      end
 
-        it "puts leader the team with more points" do
-          results = @service.classification
+      context "when a match has not been played" do
+        it "keeps classification as is" do
+          matches = [Match.new(a_team, other_team,)]
 
-          expect(results[0].team).to eq(@last)
-        end
+          classification = @service.calculate_classification(teams, matches)
 
-        it "add 3 points per victory" do
-          results = @service.classification
-
-          expect(results[0].points).to eq(6)
+          expect(classification[0].points).to eq(0)
+          expect(classification[1].points).to eq(0)
         end
       end
     end
+
+    it "orders by points" do
+      matches = [Match.new(other_team, a_team, 13, 1)]
+
+      classification = @service.calculate_classification(teams, matches)
+
+      expect(classification[0].team).to eq(other_team)
+      expect(classification[1].team).to eq(a_team)
+    end
   end
 end
+
