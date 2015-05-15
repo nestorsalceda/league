@@ -15,6 +15,10 @@ module League
     def add_journey(journey)
       @journeys << journey
     end
+
+    def all_matches
+      journeys.map { |journey| journey.matches }.flatten
+    end
   end
 
   class Group

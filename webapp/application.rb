@@ -28,7 +28,7 @@ module League::Webapp
 
       classifications = {}
       competition.groups.each do |group|
-        classifications[group] = @classification_service.classification_for(group, competition)
+        classifications[group] = @classification_service.calculate_classification(group.teams, competition.all_matches)
       end
 
       slim :index, :locals => {

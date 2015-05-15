@@ -21,8 +21,8 @@
                 - for match in journey.matches
                   tr
                     td #{match.local}
-                    td #{match.local_result}
-                    td #{match.visitor_result}
+                    td #{match.local_result if match.has_been_played?}
+                    td #{match.visitor_result if match.has_been_played?}
                     td #{match.visitor}
 
   h2 Clasificación de grupos
