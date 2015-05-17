@@ -20,10 +20,19 @@
               tbody
                 - for match in journey.matches
                   tr
-                    td #{match.local}
+                    - if match.winner == match.local
+                      td.text-primary
+                        strong #{match.local}
+                    - else
+                      td #{match.local}
+
                     td #{match.local_result if match.has_been_played?}
                     td #{match.visitor_result if match.has_been_played?}
-                    td #{match.visitor}
+                    - if match.winner == match.visitor
+                      td.text-primary
+                        strong #{match.visitor}
+                    - else
+                      td #{match.visitor}
 
   h2 Clasificación de grupos
   .row
