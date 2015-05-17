@@ -1,6 +1,6 @@
 module League
   POINTS_PER_VICTORY = 3
-  ClassificationEntry = Struct.new('ClassificationEntry', :team, :points, :played_games, :scored)
+  ClassificationEntry = Struct.new('ClassificationEntry', :team, :points, :played_games, :scored, :against)
 
   class ClassificationService
 
@@ -17,7 +17,10 @@ module League
             classification[match.visitor].played_games += 1
 
             classification[match.local].scored += match.local_result
+            classification[match.local].against += match.visitor_result
+
             classification[match.visitor].scored += match.visitor_result
+            classification[match.visitor].against += match.local_result
           end
         end
       end
@@ -30,7 +33,7 @@ module League
     def empty_classification_for(teams)
       classification = {}
       teams.each do |team|
-        classification[team] = ClassificationEntry.new(team, 0, 0, 0)
+        classification[team] = ClassificationEntry.new(team, 0, 0, 0, 0)
       end
       classification
     end

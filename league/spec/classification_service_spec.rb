@@ -57,20 +57,17 @@ module League
     end
 
     context "when counting played games" do
-      it "increases played games for local team" do
+      before(:each) do
         matches = [Match.new(other_team, a_team, 13, 1)]
+        @classification = @service.calculate_classification(teams, matches)
+      end
 
-        classification = @service.calculate_classification(teams, matches)
-
-        expect(classification[0].played_games).to eq(1)
+      it "increases played games for local team" do
+        expect(@classification[0].played_games).to eq(1)
       end
 
       it "increases played games for visitor team" do
-        matches = [Match.new(other_team, a_team, 13, 1)]
-
-        classification = @service.calculate_classification(teams, matches)
-
-        expect(classification[1].played_games).to eq(1)
+        expect(@classification[1].played_games).to eq(1)
       end
     end
 
@@ -84,8 +81,16 @@ module League
         expect(@classification[0].scored).to eq(13)
       end
 
+      it "adds against results to local team" do
+        expect(@classification[0].against).to eq(1)
+      end
+
       it "adds scored results to visitor team" do
         expect(@classification[1].scored).to eq(1)
+      end
+
+      it "adds against results to visitor team" do
+        expect(@classification[1].against).to eq(13)
       end
     end
   end
