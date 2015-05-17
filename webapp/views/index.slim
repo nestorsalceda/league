@@ -40,6 +40,8 @@
                     th Equipo
                     th Puntos
                     th Jugados
+                    th Favor
+                    th Contra
                 tbody
                   - classifications[group].each_with_index do |entry, index|
                     tr
@@ -51,3 +53,7 @@
                         = entry.points
                       td
                         = entry.played_games
+                      td
+                        = entry.scored
+                      td.
+                        = entry.against
