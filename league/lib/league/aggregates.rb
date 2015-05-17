@@ -54,7 +54,7 @@ module League
   class Match
     attr_reader :local, :visitor
 
-    def initialize(local, visitor, local_result=-1, visitor_result=-1)
+    def initialize(local, visitor, local_result=nil, visitor_result=nil)
       @local = local
       @visitor = visitor
       @local_result = local_result
@@ -67,12 +67,12 @@ module League
     end
 
     def local_result
-      return 0 if @local_result == -1
+      return 0 if @local_result.nil?
       @local_result
     end
 
     def visitor_result
-      return 0 if @visitor_result == -1
+      return 0 if @visitor_result.nil?
       @visitor_result
     end
 
@@ -83,7 +83,7 @@ module League
     end
 
     def has_been_played?
-      @local_result != -1 or @visitor_result != -1
+      not @local_result.nil? and not @visitor_result.nil?
     end
   end
 end
