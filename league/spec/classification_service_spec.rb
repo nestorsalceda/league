@@ -55,6 +55,24 @@ module League
       expect(classification[0].team).to eq(other_team)
       expect(classification[1].team).to eq(a_team)
     end
+
+    context "when counting played games" do
+      it "increases played game for local team" do
+        matches = [Match.new(other_team, a_team, 13, 1)]
+
+        classification = @service.calculate_classification(teams, matches)
+
+        expect(classification[0].played_games).to eq(1)
+      end
+
+      it "increases played game for visitor team" do
+        matches = [Match.new(other_team, a_team, 13, 1)]
+
+        classification = @service.calculate_classification(teams, matches)
+
+        expect(classification[1].played_games).to eq(1)
+      end
+    end
   end
 end
 
