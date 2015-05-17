@@ -1,10 +1,18 @@
 require 'sinatra/base'
 require 'slim'
+require 'i18n'
+require 'i18n/backend/fallbacks'
 
 require "league"
 
 module League::Webapp
   class Application < Sinatra::Base
+    configure do
+      I18n::Backend::Simple.send(:include, I18n::Backend::Fallbacks)
+      I18n.load_path = Dir[File.join(settings.root, 'locales', '*.yml')]
+      I18n.backend.load_translations
+    end
+
     configure :development do
       require 'better_errors'
       require 'sinatra/reloader'
@@ -21,6 +29,10 @@ module League::Webapp
       super(app)
 
       @classification_service = League::ClassificationService.new
+    end
+
+    before do
+      I18n.locale = :es
     end
 
     get '/:competition' do

@@ -28,7 +28,7 @@ module League
     end
 
     def journey(date, &block)
-      @journey = Journey.new(date)
+      @journey = Journey.new(Date.parse(date))
       @competition.add_journey(@journey)
 
       instance_eval &block
