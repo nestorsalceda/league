@@ -93,6 +93,14 @@ module League
         expect(@classification[1].against).to eq(13)
       end
     end
+
+    it "counts won games" do
+      matches = [Match.new(other_team, a_team, 13, 1)]
+
+      classification = @service.calculate_classification(teams, matches)
+
+      expect(classification[0].won_games).to eq(1)
+    end
   end
 end
 
