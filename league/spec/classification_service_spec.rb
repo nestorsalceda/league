@@ -47,13 +47,27 @@ module League
       end
     end
 
-    it "orders by points" do
-      matches = [Match.new(other_team, a_team, 13, 1)]
+    context 'when ordering result' do
+      it "orders by points first" do
+        matches = [Match.new(other_team, a_team, 13, 1)]
 
-      classification = @service.calculate_classification(teams, matches)
+        classification = @service.calculate_classification(teams, matches)
 
-      expect(classification[0].team).to eq(other_team)
-      expect(classification[1].team).to eq(a_team)
+        expect(classification[0].team).to eq(other_team)
+        expect(classification[1].team).to eq(a_team)
+      end
+
+      it "orders by played games" do
+        team_without_games = "team without games"
+        teams = [a_team, other_team, team_without_games]
+        matches = [Match.new(a_team, other_team, 13, 1)]
+
+        classification = @service.calculate_classification(teams, matches)
+
+        expect(classification[0].team).to eq(a_team)
+        expect(classification[1].team).to eq(other_team)
+        expect(classification[2].team).to eq(team_without_games)
+      end
     end
 
     context "when counting played games" do

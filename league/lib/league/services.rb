@@ -26,7 +26,7 @@ module League
         end
       end
 
-      classification.values.sort_by{ |team| team.points }.reverse!
+      classification.values.sort_by{ |team| [team.points, team.played_games] }.reverse!
     end
 
     private
