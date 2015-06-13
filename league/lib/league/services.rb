@@ -10,7 +10,7 @@ module League
       matches.each do |match|
         if match.has_been_played?
           #TODO: Filter matches by teams parameters
-          if classification.include? match.winner
+          if classification.include? match.local and classification.include? match.visitor
             classification[match.winner].points += POINTS_PER_VICTORY
             classification[match.winner].won_games += 1
 
