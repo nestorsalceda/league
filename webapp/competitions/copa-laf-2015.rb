@@ -23,11 +23,11 @@ League::CompetitionBuilder.build('Copa LAF 2015') do
   end
 
   journey "6/6/2015" do
-    match(migas, topos_b)
+    match(migas, topos_b) { result(10, 13) }
     match(trilogy_a, topos_a) { result(13, 6) }
   end
 
   journey "13/6/2015" do
-    match(trilogy_a, "")
+    match(trilogy_a, topos_b) { result(9, 13) }
   end
 end
