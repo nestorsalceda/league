@@ -13,18 +13,19 @@ module League
     end
 
     def group(name, &block)
-      group = Group.new(name)
-      teams = yield
+      @group = Group.new(name)
+      @competition.add_group(@group)
 
-      teams.each do |team|
-        group.add_team(team)
-        name = team.gsub(' ', '_').downcase
-        define_singleton_method(name.to_sym) do
-          team
-        end
+      instance_eval &block
+    end
+
+    def team(name, location, phone, hour, day, &block)
+      team = Team.new(name, location, phone, hour, day)
+      @group.add_team(team)
+      name = team.name.gsub(' ', '_').downcase
+      define_singleton_method(name.to_sym) do
+        team
       end
-
-      @competition.add_group(group)
     end
 
     def journey(date, &block)

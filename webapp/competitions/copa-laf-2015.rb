@@ -1,10 +1,14 @@
 League::CompetitionBuilder.build('Copa LAF 2015') do
   group "A" do
-    ["Topos B", "Tonel" , "Trilogy A"]
+    team("Topos B", "", "", "", "")
+    team("Tonel", "", "", "", "")
+    team("Trilogy A", "41.644023,-0.896292", "639021358", "20:00", "Viernes")
   end
 
   group "B" do
-    ["Migas", "Topos A" , "Trilogy B"]
+     team("Migas", "", "", "", "")
+     team("Topos A", "", "", "", "")
+     team("Trilogy B", "41.644023,-0.896292", "639021358", "22:00", "Sábado")
   end
 
   journey "9/5/2015" do
