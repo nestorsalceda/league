@@ -2,25 +2,11 @@
   .page-header
     h1 #{title}
 
-  h2 Equipo: #{team.name}
-    .row
-      .col-md-6
-        .pamel.panel-primary
-          .panel-body.table-responsive
-            table.table.table-hover
-              tbody
-                tr
-                  td.text-primary
-                    Ubicación:
-                  td 
-                    #{team.location}
-                tr 
-                  td.text-primary
-                    Teléfono:
-                  td
-                    #{team.phone} 
-                tr
-                  td.text-primary
-                    Día de juego habitual:
-                  td 
-                   #{team.day} - #{team.hour}
+  .row
+    .col-md-12
+      dl.dl-horizontal
+        dt Ubicación:
+        dd #{team.location}
+
+        dt Día de juego habitual:
+        dd #{team.day} - #{team.hour}
