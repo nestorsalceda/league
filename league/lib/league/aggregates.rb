@@ -2,8 +2,8 @@ module League
   class Competition
     attr_reader :name, :groups, :journeys
 
-    def initialize(name)
-      @name = name
+    def initialize(args)
+      @name = args[:name]
       @groups = []
       @journeys = []
     end
@@ -28,11 +28,11 @@ module League
   class Team
     attr_reader :name, :location, :hour, :day
 
-    def initialize(name, location, hour, day)
-      @name = name
-      @location = location
-      @hour = hour
-      @day = day
+    def initialize(args)
+      @name = args[:name]
+      @location = args[:location]
+      @hour = args[:hour]
+      @day = args[:day]
     end
 
     def slug
@@ -47,8 +47,8 @@ module League
   class Group
     attr_reader :name, :teams
 
-    def initialize(name)
-      @name = name
+    def initialize(args)
+      @name = args[:name]
       @teams = []
     end
 
@@ -64,8 +64,8 @@ module League
   class Journey
     attr_reader :date, :matches
 
-    def initialize(date)
-      @date = date
+    def initialize(args)
+      @date = args[:date]
       @matches = []
     end
 
@@ -77,11 +77,11 @@ module League
   class Match
     attr_reader :local, :visitor
 
-    def initialize(local, visitor, local_result=nil, visitor_result=nil)
-      @local = local
-      @visitor = visitor
-      @local_result = local_result
-      @visitor_result = visitor_result
+    def initialize(args)
+      @local = args[:local]
+      @visitor = args[:visitor]
+      @local_result = args[:local_result]
+      @visitor_result = args[:visitor_result]
     end
 
     def result(local, visitor)

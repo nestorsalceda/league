@@ -1,7 +1,7 @@
 module League
   describe "ClassificationService" do
-    let(:a_team) { Team.new('Irrelevant team', 'location', 'hour', 'day') }
-    let(:other_team) { Team.new('Other team', 'location', ' hour', 'day') }
+    let(:a_team) { Team.new(name: 'Irrelevant team', location: 'location', hour: 'hour', day: 'day') }
+    let(:other_team) { Team.new(name: 'Other team', location: 'location', hour: 'hour', day: 'day') }
     let(:teams) { [a_team, other_team] }
 
     before(:each) do
@@ -16,7 +16,7 @@ module League
 
     context "when counting points" do
       it "adds 3 points for victory" do
-        matches = [Match.new(a_team, other_team, 13, 1)]
+        matches = [Match.new(local: a_team, visitor: other_team, local_result: 13, visitor_result: 1)]
 
         classification = @service.calculate_classification(teams, matches)
 
@@ -26,7 +26,7 @@ module League
 
       context "when visitor wins" do
         it "adds 3 points for victory" do
-          matches = [Match.new(other_team, a_team, 1, 13)]
+          matches = [Match.new(local: other_team, visitor: a_team, local_result: 1, visitor_result: 13)]
 
           classification = @service.calculate_classification(teams, matches)
 
@@ -37,7 +37,7 @@ module League
 
       context "when a match has not been played" do
         it "keeps classification as is" do
-          matches = [Match.new(a_team, other_team,)]
+          matches = [Match.new(local: a_team, visitor: other_team)]
 
           classification = @service.calculate_classification(teams, matches)
 
@@ -49,7 +49,7 @@ module League
 
     context 'when ordering result' do
       it "orders by points first" do
-        matches = [Match.new(other_team, a_team, 13, 1)]
+        matches = [Match.new(local: other_team, visitor: a_team, local_result: 13, visitor_result: 1)]
 
         classification = @service.calculate_classification(teams, matches)
 
@@ -60,7 +60,7 @@ module League
       it "orders by played games" do
         team_without_games = "team without games"
         teams = [a_team, other_team, team_without_games]
-        matches = [Match.new(a_team, other_team, 13, 1)]
+        matches = [Match.new(local: a_team, visitor: other_team, local_result: 13, visitor_result: 1)]
 
         classification = @service.calculate_classification(teams, matches)
 
@@ -72,7 +72,7 @@ module League
 
     context "when counting played games" do
       before(:each) do
-        matches = [Match.new(other_team, a_team, 13, 1)]
+        matches = [Match.new(local: other_team, visitor: a_team, local_result: 13, visitor_result: 1)]
         @classification = @service.calculate_classification(teams, matches)
       end
 
@@ -87,7 +87,7 @@ module League
 
     context "when counting score" do
       before(:each) do
-        matches = [Match.new(other_team, a_team, 13, 1)]
+        matches = [Match.new(local: other_team, visitor: a_team, local_result: 13, visitor_result: 1)]
         @classification = @service.calculate_classification(teams, matches)
       end
 
@@ -109,7 +109,7 @@ module League
     end
 
     it "counts won games" do
-      matches = [Match.new(other_team, a_team, 13, 1)]
+      matches = [Match.new(local: other_team, visitor: a_team, local_result: 13, visitor_result: 1)]
 
       classification = @service.calculate_classification(teams, matches)
 
