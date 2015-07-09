@@ -19,17 +19,28 @@ module League
     def all_matches
       journeys.map { |journey| journey.matches }.flatten
     end
+
+    def teams
+      groups.map { |group| group.teams }.flatten
+    end
   end
 
   class Team
-    attr_reader :name, :location, :phone, :hour, :day
+    attr_reader :name, :location, :hour, :day
 
-    def initialize(name, location, phone, hour, day)
+    def initialize(name, location, hour, day)
       @name = name
       @location = location
-      @phone = phone
       @hour = hour
       @day = day
+    end
+
+    def slug
+      name.gsub(' ', '-').downcase
+    end
+
+    def to_sym
+      name.gsub(' ', '_').downcase.to_sym
     end
   end
 

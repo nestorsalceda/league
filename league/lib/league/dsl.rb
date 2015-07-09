@@ -19,11 +19,10 @@ module League
       instance_eval &block
     end
 
-    def team(name, location, phone, hour, day, &block)
-      team = Team.new(name, location, phone, hour, day)
+    def team(name, location, hour, day, &block)
+      team = Team.new(name, location, hour, day)
       @group.add_team(team)
-      name = team.name.gsub(' ', '_').downcase
-      define_singleton_method(name.to_sym) do
+      define_singleton_method(team.to_sym) do
         team
       end
     end

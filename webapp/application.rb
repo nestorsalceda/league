@@ -49,5 +49,17 @@ module League::Webapp
         :classifications => classifications
       }
     end
+
+
+    get '/:competition/:team' do
+      competition = Object.new.instance_eval(File.read(File.join(__dir__, "competitions", "#{params['competition']}.rb")))
+
+      team = competition.teams.detect{ |t| t.slug == params['team'] }
+
+      slim :team, :locals => {
+        :title => team.name,
+        :team => team
+      }
+    end
   end
 end

@@ -1,7 +1,7 @@
 module League
   describe "ClassificationService" do
-    let(:a_team) { Team.new('Irrelevant team', 'location', 'phone', 'hour', 'day') }
-    let(:other_team) { Team.new('Other team', 'location', 'phone', ' hour', 'day') }
+    let(:a_team) { Team.new('Irrelevant team', 'location', 'hour', 'day') }
+    let(:other_team) { Team.new('Other team', 'location', ' hour', 'day') }
     let(:teams) { [a_team, other_team] }
 
     before(:each) do
