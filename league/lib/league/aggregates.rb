@@ -21,6 +21,18 @@ module League
     end
   end
 
+  class Team
+    attr_reader :name, :location, :phone, :hour, :day
+
+    def initialize(name, location, phone, hour, day)
+      @name = name
+      @location = location
+      @phone = phone
+      @hour = hour
+      @day = day
+    end
+  end
+
   class Group
     attr_reader :name, :teams
 

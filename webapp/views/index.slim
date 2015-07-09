@@ -22,19 +22,19 @@
                   tr
                     - if match.winner == match.local
                       td.text-primary
-                        strong #{match.local}
+                        strong #{match.local.name}
                     - else
-                      td #{match.local}
+                      td #{match.local.name}
 
                     td #{match.local_result if match.has_been_played?}
                     td #{match.visitor_result if match.has_been_played?}
                     - if match.winner == match.visitor
                       td.text-primary
-                        strong #{match.visitor}
+                        strong #{match.visitor.name}
                     - else
-                      td #{match.visitor}
+                      td #{match.visitor.name}
 
-  h2 Clasificación de grupos
+  h2 Clasificación
   .row
     - for group in competition.groups
         .col-md-6
@@ -58,7 +58,8 @@
                       td
                         = index + 1
                       td
-                        = entry.team
+                        a href="#{entry.team.name}" 
+                          = entry.team.name
                       td
                         = entry.points
                       td
