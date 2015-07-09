@@ -58,7 +58,7 @@
                       td
                         = index + 1
                       td
-                        a href="#{entry.team.name}" 
+                        a href="#{params['competition']}/#{entry.team.slug}"
                           = entry.team.name
                       td
                         = entry.points
