@@ -19,7 +19,7 @@
                   th Visitante
               tbody
                 - for match in journey.matches
-                  tr
+                  tr title="#{match.local.day} - #{match.local.hour}"
                     - if match.winner == match.local
                       td.text-primary
                         strong #{match.local.name}
