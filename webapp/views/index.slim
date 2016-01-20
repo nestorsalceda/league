@@ -37,7 +37,7 @@
   h2 Clasificación
   .row
     - for group in competition.groups
-        .col-md-6
+        div class="col-md-#{12 / competition.groups.length}"
           .panel.panel-primary
             .panel-heading
               .text-center Grupo #{group.name}
