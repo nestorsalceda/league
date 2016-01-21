@@ -18,7 +18,7 @@ League::CompetitionBuilder.build('Segunda División') do
 
   journey "19/12/2015" do
     match(alambique_de_la_sabina, trilogy) { result(10, 13) }
-    match(atrio, rolladero)
+    match(atrio, rolladero) { result(8, 13) }
   end
 
   journey "16/1/2016" do
